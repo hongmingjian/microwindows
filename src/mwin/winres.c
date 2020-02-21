@@ -24,7 +24,9 @@
 static HRSRC mruResources = NULL;
 static int mruResCount = 0;
 
+#if HAVE_BMP_SUPPORT
 static PMWIMAGEHDR resDecodeBitmap(unsigned char *buffer, int size);
+#endif
 
 static void
 mwAddResource(HRSRC hRes)
@@ -137,7 +139,9 @@ mwCreateInstance(int argc, char *argv[])
 	else
 		strcat((char *) mwAppInst->szResFilename, ".res");
 
+#if HAVE_FILEIO
 	mwAppInst->fResources = fopen(mwAppInst->szResFilename, "rb");
+#endif /*HAVE_FILEIO*/
 	return (HINSTANCE) mwAppInst;
 }
 
@@ -145,12 +149,15 @@ mwCreateInstance(int argc, char *argv[])
 void
 mwFreeInstance(HINSTANCE hInst)
 {
+#if HAVE_FILEIO
 	if (((PMWAPPINSTANCE) hInst)->fResources) fclose (((PMWAPPINSTANCE) hInst)->fResources);
+#endif /*HAVE_FILEIO*/
 	free((void *) ((PMWAPPINSTANCE) hInst)->szResFilename);
 	free((void *) ((PMWAPPINSTANCE) hInst));
 }
 
 
+#if HAVE_FILEIO
 /*
  *  IMPORTANT NOTE:
  *  When reading from .res file we read one field a time.
@@ -338,7 +345,7 @@ mwFindResource(HINSTANCE hInst, LPCTSTR resType, LPCTSTR resName, PMWRESOURCEHEA
 
 	return NULL;
 }
-
+#endif /*HAVE_FILEIO*/
 
 /*
  *  Allocate a text string from a template.
@@ -597,13 +604,14 @@ FindResource(HMODULE hModule, LPCTSTR resName, LPCTSTR resType)
 	if (hRes == NULL)
 		return NULL;
 
+#if HAVE_FILEIO
 	hRes->f = mwFindResource(hModule, resType, resName, &hRes->head);
 	if (hRes->f == NULL) {
 		free(hRes);
 		return NULL;
 	}
-
 	hRes->fPos = ftell(hRes->f);
+#endif /*HAVE_FILEIO*/
 	hRes->type = resType;
 	hRes->name = resName;
 	hRes->pData = NULL;
@@ -640,11 +648,13 @@ LoadResource(HMODULE hModule, HRSRC hRes)
 		return NULL;
 
 //printf("LoadResource size %d\n", hRes->head.DataSize);
+#if HAVE_FILEIO
 	fseek(hRes->f, hRes->fPos, SEEK_SET);
 	if (fread(hRes->pData, 1, hRes->head.DataSize, hRes->f) < hRes->head.DataSize) {
 		free(hRes->pData);
 		return NULL;
 	}
+#endif /*HAVE_FILEIO*/
 	return hRes;
 }
 
@@ -685,9 +695,10 @@ FreeResource(HGLOBAL hObj)
 int WINAPI
 LoadString(HINSTANCE hInstance, UINT uid, LPTSTR lpBuffer, int nMaxBuff)
 {
+	int retV = 0;
+#if HAVE_FILEIO
 	MWRESOURCEHEADER resHead;
 	int blkId = (uid >> 4) + 1;
-	int retV = 0;
 	int i, x, ln;
 	FILE *f;
 	BOOL bEof;
@@ -719,10 +730,11 @@ LoadString(HINSTANCE hInstance, UINT uid, LPTSTR lpBuffer, int nMaxBuff)
 		}
 		*ptr++ = (TCHAR) 0;
 	}
-
+#endif /*HAVE_FILEIO*/
 	return retV;
 }
 
+#if HAVE_BMP_SUPPORT
 /*
  *  Load a bitmap from resource file.
  */
@@ -770,3 +782,4 @@ resFreeBitmap(PMWIMAGEHDR pimage)
 {
 	GdFreePixmap((PSD)pimage);		// FIXME uses shared header
 }
+#endif

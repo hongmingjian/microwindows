@@ -8,13 +8,16 @@
  * This a stretch blit implementation based on ideas given to me by
  * Tomasz Cejner - thanks! :)
  */
+#if MW_FEATURE_IMAGES /* whole file */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "uni_std.h"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "device.h"
 
-#if MW_FEATURE_IMAGES /* whole file */
 
 #define DEFINE_COPY_ROW(name, type)					\
 static void name(type *src, int src_w, type *dst, int dst_w)		\

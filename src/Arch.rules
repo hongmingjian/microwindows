@@ -338,6 +338,26 @@ CFLAGS += -v
 endif
 endif
 
+#-----EPOS-----
+ifeq ($(ARCH), EPOS)
+
+ifeq ($(shell uname -s),Darwin)
+NATIVETOOLSPREFIX        =i586-elf-
+endif
+
+ifeq ($(OS),Windows_NT)
+	EPOS=Z:\local\git\epos
+else
+	EPOS=/Users/hmj/cloud/local/git/epos
+endif
+
+INCLUDEDIRS +=-I$(EPOS)/userapp/include -I$(EPOS)/include
+CFLAGS+=-O2 -ggdb -nostdinc -m32 -Wall -DSNPRINTF_FLOATPOINT \
+	-ffreestanding -fleading-underscore -mno-ms-bitfields \
+	-fno-pie #-fno-stack-check -fno-stack-protector -mno-stack-arg-probe
+endif
+#-----EPOS-----
+
 ifeq ($(WINEXTRA), Y)
 DEFINES += -DWINEXTRA=1
 INCLUDEDIRS += -I$(WINEXTRA_INCLUDE)

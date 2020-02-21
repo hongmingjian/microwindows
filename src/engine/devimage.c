@@ -14,6 +14,7 @@
  *
  * WARNING: GIF decoder routine is licensed under LGPL only!
  */
+#if MW_FEATURE_IMAGES /* whole file */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,7 +29,6 @@
 #include <sys/mman.h>
 #endif
 
-#if MW_FEATURE_IMAGES /* whole file */
 
 static PSD GdDecodeImage(buffer_t *src, char *path, int flags);
 

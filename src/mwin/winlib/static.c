@@ -270,6 +270,7 @@ ssDrawStaticLabel(HWND hwnd, HDC hdc, LPRECT pRcClient)
 	}
 }
 
+#if HAVE_BMP_SUPPORT
 /*
  *  Show DIB for SS_BITMAP style...
  */
@@ -287,6 +288,7 @@ ssShowBitmap(HWND hwnd, HDC hdc)
 		resFreeBitmap(himg);
 	}
 }
+#endif
 
 static LRESULT CALLBACK
 StaticControlProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -356,13 +358,14 @@ StaticControlProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 					  rcClient.right, rcClient.bottom);
 				break;
 
+#if HAVE_BMP_SUPPORT
 			case SS_BITMAP:
 				ssShowBitmap(hwnd, hdc);
 #if 0				/* jmt: fix: no FillBoxWithBitmap() */
 				FillBoxWithBitmap(hdc, 0, 0, 0, 0, (PBITMAP) (pCtrl->userdata));
 #endif
 				break;
-
+#endif
 			case SS_ICON:
 #if 0				/* jmt: fix: no DrawIcon */
 				hIcon = (HICON) (pCtrl->userdata);

@@ -9,9 +9,10 @@
  */
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
+#include <limits.h>
+//#include <dirent.h>
 #include <sys/types.h>
-#include <sys/stat.h>
+//#include <sys/stat.h>
 #include "uni_std.h"
 #include "windows.h"	
 
@@ -23,6 +24,8 @@
 #define ID_COMBO 11
 #define ID_CANCEL 12
 
+#define PATH_MAX 256
+
 struct filters {
   char name[32];
   char suffix[32];
@@ -32,7 +35,7 @@ char currentfilter[128];
 char curpath[256] = {"."};
 
 LRESULT CALLBACK FileOpenCtrlProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-
+/*
 static void fill_listbox(HWND hwnd,const char *path)
 {
        struct dirent **namelist;
@@ -61,12 +64,12 @@ static void fill_listbox(HWND hwnd,const char *path)
            free(namelist);
        }
 }
-
+*/
 static int isDirectory(const char *path) {
-   struct stat statbuf;
-   if (stat(path, &statbuf) != 0)				// FIXME non-portable 
+//   struct stat statbuf;
+//   if (stat(path, &statbuf) != 0)				// FIXME non-portable 
        return 0;
-   return S_ISDIR(statbuf.st_mode);
+//   return S_ISDIR(statbuf.st_mode);
 }
 
 /* Window procedure for the dialog box */
@@ -89,8 +92,8 @@ LRESULT CALLBACK FileOpenCtrlProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
       if (mdData->lpstrInitialDir != NULL) {
 	sprintf(curpath,"%s",mdData->lpstrInitialDir);
       }
-      if (strcmp(curpath,".")==0) getcwd(curpath, sizeof(curpath));
-      fill_listbox(hwnd,curpath);
+//      if (strcmp(curpath,".")==0) getcwd(curpath, sizeof(curpath));
+//      fill_listbox(hwnd,curpath);
       hFont = CreateFont ( 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ANTIALIASED_QUALITY, 0, "arial" );
       SendDlgItemMessage(hwnd, ID_LIST, WM_SETFONT, (WPARAM)hFont, 0 );
       SendDlgItemMessage(hwnd, ID_LIST, LB_SETITEMHEIGHT, 0, 15 );
@@ -149,7 +152,7 @@ LRESULT CALLBACK FileOpenCtrlProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 			}
 		    }
 		    SendDlgItemMessage (hwnd, ID_LIST, LB_RESETCONTENT, 0, 0);
-		    fill_listbox(hwnd,curpath);
+//		    fill_listbox(hwnd,curpath);
 		    } //dblclk
 		    sprintf(dirpath,"%s/%s",curpath,dirorfilename);
 		    if ((strcmp(dirorfilename,"..")==0) || (isDirectory(dirpath)==1) || dirflag==1) {
@@ -219,7 +222,7 @@ LRESULT CALLBACK FileOpenCtrlProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 	  sel = SendDlgItemMessage ( hwnd, ID_COMBO, CB_GETCURSEL, 0, 0 );
 	  sprintf(currentfilter,"%s",filterpairs[sel].suffix);
 	  SendDlgItemMessage (hwnd, ID_LIST, LB_RESETCONTENT, 0, 0);
-	  fill_listbox(hwnd,curpath);
+//	  fill_listbox(hwnd,curpath);
 	  }
 	  break;
       } //switch (LOWORD(wParam))

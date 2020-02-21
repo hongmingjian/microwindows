@@ -13,6 +13,7 @@
  * font files.
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include "device.h"
 #include "genfont.h"
 

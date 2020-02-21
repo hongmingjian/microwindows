@@ -30,7 +30,13 @@ OBJS := \
 	$(MW_DIR_OBJ)/images/demos/mwin/rle8.o \
 	$(MW_DIR_OBJ)/images/demos/mwin/microwin.o \
 	$(MW_DIR_OBJ)/images/demos/mwin/penguin.o \
-	$(MW_DIR_OBJ)/images/demos/mwin/dragon.o
+	$(MW_DIR_OBJ)/images/demos/mwin/dragon.o \
+	$(MW_DIR_OBJ)/images/demos/mwin/mwmine/minebomb.o \
+	$(MW_DIR_OBJ)/images/demos/mwin/mwmine/minedone.o \
+	$(MW_DIR_OBJ)/images/demos/mwin/mwmine/mineface.o \
+	$(MW_DIR_OBJ)/images/demos/mwin/mwmine/minefacelost.o \
+	$(MW_DIR_OBJ)/images/demos/mwin/mwmine/mineflag.o \
+	$(MW_DIR_OBJ)/images/demos/mwin/mwmine/minehitfalse.o
 
 TOOLS = \
 	$(MW_DIR_BIN)/convbmp \

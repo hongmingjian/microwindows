@@ -977,12 +977,13 @@ LRESULT TestMyWinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
               for (i = 0; i < (sg_boxnumx*sg_boxnumy); i++)
                   NoAdr[i].NY = FALSE; 
                    
-              srandom( time(NULL));
+//              srandom( time(NULL));
+              srand(1234);
               i = 0;
               while( i < bombnum )
                {
-                  ran1 = random()%sg_boxnumx;
-                  ran2 = random()%sg_boxnumy;
+                  ran1 = rand()%sg_boxnumx;
+                  ran2 = rand()%sg_boxnumy;
                   if(!bom[ran1][ran2].flag)
                      { 
                         bom[ran1][ran2].flag = 1;

@@ -33,13 +33,13 @@
  * On some systems you may need to set up a signal handler to ensure that
  * temporary files are deleted if the program is interrupted.  See libjpeg.doc.
  */
+#if MW_FEATURE_IMAGES && HAVE_JPEG_SUPPORT
 #include <stdio.h>
 #include <string.h>
 #include "uni_std.h"
 #include "device.h"
 #include "../drivers/genmem.h"
 
-#if MW_FEATURE_IMAGES && HAVE_JPEG_SUPPORT
 
 #define USE_STD_PALETTE		0		/* =1 to decode pal8 to standard 256 color palette*/
 

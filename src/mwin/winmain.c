@@ -5,8 +5,8 @@
  */
 #include <stdlib.h>
 #include <string.h>
-#include <signal.h>
-#include <errno.h>
+//#include <signal.h>
+//#include <errno.h>
 #include <sys/types.h>
 #include "uni_std.h"
 #include "sys_time.h"

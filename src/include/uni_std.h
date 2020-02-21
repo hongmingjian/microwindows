@@ -12,7 +12,7 @@
 #include <unistd.h>
 
 #if __MINGW32__
-#include <malloc.h> 		/* for alloca */
+//#include <malloc.h> 		/* for alloca */
 #endif
 
 #if RTEMS | PSP | __ECOS | __MINGW32__

@@ -34,6 +34,9 @@
     License along with this library; if not, write to the Free
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+#if MW_FEATURE_IMAGES && HAVE_GIF_SUPPORT
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "uni_std.h"
 #include <fcntl.h>
@@ -42,7 +45,6 @@
 #include "device.h"
 #include "../drivers/genmem.h"
 
-#if MW_FEATURE_IMAGES && HAVE_GIF_SUPPORT
 
 #define	MAXCOLORMAPSIZE		256
 #define	MAX_LWZ_BITS		12

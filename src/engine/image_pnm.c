@@ -4,6 +4,7 @@
  *
  * Image decode routine for PNM, PBM, PGM and PPM files
  */
+#if MW_FEATURE_IMAGES && HAVE_PNM_SUPPORT
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,7 +13,6 @@
 #include "device.h"
 #include "../drivers/genmem.h"
 
-#if MW_FEATURE_IMAGES && HAVE_PNM_SUPPORT
 
 enum {
 	PNM_TYPE_NOTPNM,

@@ -4,6 +4,7 @@
  *
  * Image decode routine for BMP files
  */
+#if MW_FEATURE_IMAGES && HAVE_BMP_SUPPORT
 #include <stdio.h>
 #include <string.h>
 #include "uni_std.h"
@@ -61,7 +62,6 @@ typedef struct {
 	WORD	bcBitCount;
 } MWPACKED BMPCOREHEAD;
 
-#if MW_FEATURE_IMAGES && HAVE_BMP_SUPPORT
 
 static int	DecodeRLE8(MWUCHAR *buf, buffer_t *src);
 static int	DecodeRLE4(MWUCHAR *buf, buffer_t *src);

@@ -3,13 +3,14 @@
  *
  * Image decode routine for TIFF files
  */
+#if MW_FEATURE_IMAGES && HAVE_TIFF_SUPPORT
+#include <stdio.h>
 #include <stdlib.h>
 #include "uni_std.h"
 #include "device.h"
 #include "convblit.h"
 #include "../drivers/genmem.h"
 
-#if MW_FEATURE_IMAGES && HAVE_TIFF_SUPPORT
 #include <tiffio.h>
 
 /*

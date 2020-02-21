@@ -125,6 +125,13 @@ endif
 # Screen driver set by SCREEN=
 #
 
+# EPOS
+ifeq ($(SCREEN), EPOS)
+MW_CORE_OBJS += \
+	$(MW_DIR_OBJ)/drivers/scr_epos.o \
+	$(MW_DIR_OBJ)/drivers/fb_epos.o
+endif
+
 # linux framebuffer driver
 ifeq ($(SCREEN), FB)
 MW_CORE_OBJS += $(MW_DIR_OBJ)/drivers/scr_fb.o

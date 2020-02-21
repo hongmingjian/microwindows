@@ -5,13 +5,14 @@
  *
  * Contributed by:
  */
+#if MW_FEATURE_IMAGES && HAVE_XPM_SUPPORT
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "uni_std.h"
 #include "device.h"
 #include "../drivers/genmem.h"
 
-#if MW_FEATURE_IMAGES && HAVE_XPM_SUPPORT
 
 struct xpm_cmap {
 	int 			palette_entry;

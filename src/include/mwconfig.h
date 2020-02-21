@@ -73,15 +73,15 @@
 
 /* the following defines are set=0 in Arch.rules based on ARCH= setting*/
 #ifndef HAVE_SELECT
-#define HAVE_SELECT		1		/* =1 has select system call*/
+#define HAVE_SELECT		0		/* =1 has select system call*/
 #endif
 
 #ifndef HAVE_SIGNAL
-#define HAVE_SIGNAL		1		/* =1 has signal system call*/
+#define HAVE_SIGNAL		0		/* =1 has signal system call*/
 #endif
 
 #ifndef HAVE_MMAP
-#define HAVE_MMAP       1       /* =1 has mmap system call*/
+#define HAVE_MMAP       0       /* =1 has mmap system call*/
 #endif
 
 #ifndef HAVE_FLOAT
@@ -89,7 +89,7 @@
 #endif
 
 #ifndef MW_FEATURE_TIMERS
-#define MW_FEATURE_TIMERS 1		/* =1 to include MWTIMER support */
+#define MW_FEATURE_TIMERS 0		/* =1 to include MWTIMER support */
 #endif
 
 #ifndef MW_FEATURE_IMAGES
@@ -284,9 +284,9 @@
 /* error.c*/
 int	GdError(const char *format, ...);
 
-#define EPRINTF			GdError		/* error output*/
+#define EPRINTF			printf		/* error output*/
 #if DEBUG
-#define DPRINTF			GdError		/* debug output*/
+#define DPRINTF			printf		/* debug output*/
 #else
 #define DPRINTF(str, ...)			/* no debug output*/
 #endif

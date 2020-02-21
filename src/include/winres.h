@@ -23,7 +23,9 @@ typedef struct tagMWAPPINSTANCE
     LPCSTR szCmdLine;
     int argc;
     char **argv;
+#if HAVE_FILEIO
     FILE *fResources;
+#endif
 } MWAPPINSTANCE, *PMWAPPINSTANCE;
 
 
@@ -186,8 +188,10 @@ BYTE *resDialogItemTemplate(BYTE *dest, DWORD style, DWORD dwExtendedStyle, int 
  */
 typedef struct tagMWRSRC
 {
+#if HAVE_FILEIO
 	FILE *f;
 	long fPos;
+#endif
 	MWRESOURCEHEADER head;
 	LPCTSTR type;
 	LPCTSTR name;
@@ -197,8 +201,10 @@ typedef struct tagMWRSRC
 } MWRSRC, *HRSRC;
 
 
+#if HAVE_FILEIO
 //  Resource access internal functions
 FILE *mwFindResource ( HINSTANCE hInst, LPCTSTR resType, LPCTSTR resName, PMWRESOURCEHEADER pResHead );
+#endif
 
 PMWDLGITEMTEMPLATE resNextDlgItem ( PMWDLGITEMTEMPLATE pItem );
 PMWDLGITEMTEMPLATE resFirstDlgItem ( PMWDLGTEMPLATE pDlg );

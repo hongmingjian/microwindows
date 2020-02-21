@@ -9,12 +9,13 @@
  * 2007-Nov-15 - Vladimir Ananiev (vovan888 at gmail com)
  *		alpha channel, gamma correction added - ripped from pngm2pnm.c
  */
+#if MW_FEATURE_IMAGES && HAVE_PNG_SUPPORT
+#include <stdio.h>
 #include <stdlib.h>
 #include "uni_std.h"
 #include "device.h"
 #include "../drivers/genmem.h"
 
-#if MW_FEATURE_IMAGES && HAVE_PNG_SUPPORT
 #include <png.h>
 
 /* png_jmpbuf() macro is not defined prior to libpng-1.0.6*/
